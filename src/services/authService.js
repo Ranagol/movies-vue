@@ -8,17 +8,23 @@ export default class AuthService {
 
   
   login(email, password) {
-    return axios.post('login', { email, password }).then(response => {
-      window.localStorage.setItem('loginToken', response.data.token);
-      this.setAxiosDefaultAuthorizationHeader();
-    });
-  }
-
-  register(name, email, password){
-    return axios.post('register', { name, email, password}).then(response => {
+    return axios.post('login', { email, password })
+    .then(response => {
+      console.log(response, 'response');//ovde uhvatimo response
       window.localStorage.setItem('loginToken', response.data.token);
       this.setAxiosDefaultAuthorizationHeader();
     })
+    .catch(() => alert('invalid credentials'));//ako ima neki problem, catch se aktivira, pa odradimo alert
+  }
+
+
+  register(name, email, password, password_confirmation){
+    return axios.post('register', { name, email, password, password_confirmation})
+    .then(response => {
+      console.log(response, 'response');//ovde uhvatimo response
+      window.localStorage.setItem('loginToken', response.data.token);
+      this.setAxiosDefaultAuthorizationHeader();
+    });//.catch(() => alert('invalid credentials'));//ako ima neki problem, catch se aktivira, pa odradimo alert
   }
   
 

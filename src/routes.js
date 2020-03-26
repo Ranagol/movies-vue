@@ -5,7 +5,6 @@ import Register from './components/Register';
 import ShowMovie from './components/ShowMovie';
 
 export const routes = [
-  
   { path: '/movies', name: 'movies', component: Movies},
   { path: '/add-movie', name: 'add-movie', component: AddMovie},
   { path: '*', redirect: '/movies'},

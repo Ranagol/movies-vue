@@ -5,7 +5,7 @@
       <input v-model="name" type="text" class="form-control" name="name" placeholder="name">
       <input v-model="email"  type="email" class="form-control" name="email" placeholder="email">
       <input v-model="password"  type="password" class="form-control" placeholder="password">
-      <input v-model="confirmPassword"  type="confirmPassword" class="form-control" placeholder="confirmPassword">
+      <input v-model="password_confirmation"  type="password_confirmation" class="form-control" placeholder="password_confirmation">
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
@@ -19,15 +19,21 @@ export default {
       name: '',
       email: '',
       password: '',
-      confirmPassword: '',
+      password_confirmation: '',
     }
   },
   methods: {
     async register(){
+      //this is the frontend side check for the password/password_confirmation
+      if(this.password !== this.password_confirmation){
+        alert('Youre password and password_confirmation fields have different passwords!');
+        return;
+      }
       console.log('register method started');
-      await authService.register(this.name, this.email, this.password);
+      await authService.register(this.name, this.email, this.password, this.password_confirmation);
       this.$router.push('login');
-    }
+    },
+    
   }
 }
 </script>

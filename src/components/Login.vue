@@ -20,10 +20,11 @@ export default {
     };
   },
   methods: {
-    async login() {
+    login() {
       //console.log(this.email, this.password);
-      await authService.login(this.email, this.password);
-      this.$router.push('movies');
+      authService.login(this.email, this.password).then(()=>{ 
+        this.$router.push('movies');
+      }).catch(() => alert('invalid credentials'));
     }
   }
 };
