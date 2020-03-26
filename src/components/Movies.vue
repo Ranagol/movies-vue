@@ -13,7 +13,7 @@
       </tr>
       <tr v-for="movie in movies" :key="movie.id">
         <td>{{ movie.id }}</td>
-        <td>{{ movie.title }}</td>
+        <td><router-link :to="`/movies/${movie.id}`">{{ movie.title }}</router-link></td>
         <td>{{ movie.director }}</td>
         <td>{{ movie.imageUrl }}</td>
         <td>{{ movie.duration }}</td>
@@ -38,8 +38,9 @@ export default {
     this.movies = await movieService.getAll();
   },
   methods: {
-    deleteMovie(id){
+    async deleteMovie(id){
       movieService.deleteMovie(id);
+      this.movies = await movieService.getAll();
     }
   }
 }
