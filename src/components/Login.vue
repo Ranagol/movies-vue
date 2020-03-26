@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     async login() {
+      //console.log(this.email, this.password);
       await authService.login(this.email, this.password);
       this.$router.push('movies');
     }

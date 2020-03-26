@@ -7,6 +7,7 @@
         Logout
       </a>
       <router-link class="nav-item nav-link" to="/login" v-else>Login</router-link>
+      <router-link class="nav-item nav-link" to="/register">Register</router-link>
     </div>
   </nav>
 </template>

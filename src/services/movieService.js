@@ -15,6 +15,11 @@ class MovieService {
   async createMovie(body){
     await HTTP.post("/movies", body);
   }
+
+  async deleteMovie(id) {
+    await HTTP.delete(`/movies/${id}`);
+  }
+
 }
 
 const movieService = new MovieService();
