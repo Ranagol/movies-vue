@@ -13,7 +13,7 @@
 
 <script>
 import { authService } from '../services/authService';
-
+import { EventBus } from './eventbus';
 export default {
   data() {
     return {
@@ -29,6 +29,9 @@ export default {
   },
   created(){
     this.isAuthenticated = authService.isAuthenticated();
+    EventBus.$on('loginSuccesfullyDone', () => {
+      this.isAuthenticated = true;
+    })
   },
   watch: {
     isAuthenticated: function(){
@@ -36,4 +39,6 @@ export default {
     }
   }
 };
+
+
 </script>

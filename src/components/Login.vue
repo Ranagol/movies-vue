@@ -11,7 +11,7 @@
 
 <script>
 import { authService } from '../services/authService';
-
+import { EventBus } from './eventbus';
 export default {
   data() {
     return {
@@ -25,6 +25,7 @@ export default {
       authService.login(this.email, this.password).then(()=>{ 
         this.$emit('loginActivated');
         this.$router.push('movies');
+        EventBus.$emit('loginSuccesfullyDone');
       }).catch(() => alert('invalid credentials from Vanja codes'));
     }
   }
