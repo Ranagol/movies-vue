@@ -13,20 +13,13 @@
 
 <script>
 import { authService } from '../services/authService';
-
+import { loginHeaderMixin } from './mixins/loginHeaderMixin';
 export default {
+  mixins: [ loginHeaderMixin ],
   data() {
-    return {
-      isAuthenticated: authService.isAuthenticated(),
-    };
+   
   },
-  methods: {
-    logout() {
-      authService.logout();
-      this.isAuthenticated = false;
-      this.$router.push('login');
-    },
-  },
+  
   created(){
     this.isAuthenticated = authService.isAuthenticated();
   },

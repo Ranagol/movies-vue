@@ -10,23 +10,9 @@
 </template>
 
 <script>
-import { authService } from '../services/authService';
-
+//import { authService } from '../services/authService';
+import { loginHeaderMixin } from './mixins/loginHeaderMixin';
 export default {
-  data() {
-    return {
-      email: '',
-      password: ''
-    };
-  },
-  methods: {
-    login() {
-      //console.log(this.email, this.password);
-      authService.login(this.email, this.password).then(()=>{ 
-        this.$emit('loginActivated');
-        this.$router.push('movies');
-      }).catch(() => alert('invalid credentials from Vanja codes'));
-    }
-  }
+   mixins: [ loginHeaderMixin ],
 };
 </script>
