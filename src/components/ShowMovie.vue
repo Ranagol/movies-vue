@@ -34,9 +34,24 @@ export default {
       movie: [],
     }
   },
+  
   async created(){
     this.movie = await movieService.getMovieById(this.$route.params.id);
   },
+  
+
+ /* //KOPIRANJE OD VANJE NE RADI
+  methods: {
+    getSingleMovie(id){
+      return movieService.getMovieById(id);
+    }
+  },
+  beforeRoteEnter(to, from, next){
+    next(vm => {
+      vm.getSingleMovie(to.params.id).then(response => vm.movie = response.data);
+    })
+  }
+  */
   
 }
 

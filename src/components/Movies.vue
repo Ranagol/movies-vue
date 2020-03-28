@@ -36,6 +36,7 @@ export default {
   },
   async created(){
     this.movies = await movieService.getAll();
+    this.$forceUpdate();
   },
   methods: {
     async deleteMovie(id){

@@ -4,8 +4,8 @@
     <form @submit.prevent="register">
       <input v-model="name" type="text" class="form-control" name="name" placeholder="name">
       <input v-model="email"  type="email" class="form-control" name="email" placeholder="email">
-      <input v-model="password"  type="password" class="form-control" placeholder="password">
-      <input v-model="password_confirmation"  type="password_confirmation" class="form-control" placeholder="password_confirmation">
+      <input v-model="password"  type="password" class="form-control" name="password" placeholder="password">
+      <input v-model="password_confirmation"  type="password_confirmation" name="password_confirmation" class="form-control" placeholder="password_confirmation">
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

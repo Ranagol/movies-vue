@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default class AuthService {
-  constructor() {
+  constructor() {//this is a must. This waz we set up automatically the token into the request header.
     axios.defaults.baseURL = 'http://localhost:8000/api/';
     this.setAxiosDefaultAuthorizationHeader();//set the token in the header of our requests
   }
@@ -46,11 +46,11 @@ export default class AuthService {
   
 
   setAxiosDefaultAuthorizationHeader() {
-    const TOKEN = window.localStorage.getItem('loginToken');//take the toke from local storage
+    const TOKEN = window.localStorage.getItem('loginToken');//take the token from local storage
     if (!TOKEN) {//if there is no token
       return;//...just return, without token. No token = user not authorized = can't use this Vue
     }
-    axios.defaults.headers.common['Authorization'] = `Bearer ${TOKEN}`;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${TOKEN}`;//here we put the received token from Laravel into our request header
   }
 
   logout() {

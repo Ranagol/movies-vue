@@ -23,11 +23,11 @@ export default {
     login() {
       //console.log(this.email, this.password);
       authService.login(this.email, this.password).then(()=>{ 
-        this.$emit('loginActivated');
         this.$router.push('movies');
         EventBus.$emit('loginSuccesfullyDone');
       }).catch(() => alert('invalid credentials from Vanja codes'));
     }
   }
+  
 };
 </script>
