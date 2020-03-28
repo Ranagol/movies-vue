@@ -6,7 +6,7 @@
       <a href="#" class="nav-item nav-link" @click.prevent="logout" v-show="isAuthenticated">Logout</a>
       <router-link class="nav-item nav-link" to="/login" v-show="!isAuthenticated">Login</router-link>
       <router-link class="nav-item nav-link" to="/register" v-show="!isAuthenticated">Register</router-link>
-      <div v-bind="isAuthenticated">isAuthenticated status: {{ isAuthenticated }}</div>
+      <!--<div v-bind="isAuthenticated">isAuthenticated status: {{ isAuthenticated }}</div>-->
     </div>
   </nav>
 </template>

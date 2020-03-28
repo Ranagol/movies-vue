@@ -35,23 +35,21 @@ export default {
     }
   },
   
-  async created(){
-    this.movie = await movieService.getMovieById(this.$route.params.id);
-  },
-  
-
- /* //KOPIRANJE OD VANJE NE RADI
   methods: {
     getSingleMovie(id){
       return movieService.getMovieById(id);
     }
   },
-  beforeRoteEnter(to, from, next){
+
+  beforeRouteEnter(to, from, next){
+    console.log(`Guard activated. From: ${from.path} to: ${to.path}`)//awesome consol.log trick to see if this is working so far
+    console.log('This is the to:', to);//just checkig the to
+    console.log('This is the from:', from);//just checking the from
     next(vm => {
-      vm.getSingleMovie(to.params.id).then(response => vm.movie = response.data);
-    })
-  }
-  */
+      vm.getSingleMovie(to.params.id).then(response => vm.movie = response);//usually here there should be response.data. But it is not. The reason: because our movieService.getMovieById(id) is already done that way, that he is already returning the response.data. So: if you have any trouble here, check the movieService.getMovieById(id) what is returning: response or response.data?
+    });
+  },
+  
   
 }
 
