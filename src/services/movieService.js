@@ -13,7 +13,12 @@ class MovieService {
   }
 
   async createMovie(body){
-    await HTTP.post("/movies", body);
+    try {
+      await HTTP.post("/movies", body);
+    } catch (error) {
+      console.log('THIS IS MY ERROR', error.response.data.errors);
+    }
+    
   }
 
   async deleteMovie(id) {

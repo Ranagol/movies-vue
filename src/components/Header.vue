@@ -1,6 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="navbar-nav">
+      <router-link class="navbar-brand" to="/movies">Movies</router-link>
       <router-link class="nav-item nav-link" to="/movies">Movies</router-link>
       <router-link class="nav-item nav-link" to="/add-movie">Add</router-link>
       <a href="#" class="nav-item nav-link" @click.prevent="logout" v-show="isAuthenticated">Logout</a>

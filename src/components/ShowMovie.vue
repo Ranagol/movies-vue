@@ -49,8 +49,7 @@ export default {
       vm.getSingleMovie(to.params.id).then(response => vm.movie = response);//usually here there should be response.data. But it is not. The reason: because our movieService.getMovieById(id) is already done that way, that he is already returning the response.data. So: if you have any trouble here, check the movieService.getMovieById(id) what is returning: response or response.data?
     });
   },
-  
-  
+
 }
 
 </script>

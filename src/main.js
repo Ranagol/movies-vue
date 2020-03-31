@@ -17,6 +17,7 @@ Postaviti da neulogovan korisnik može da pristupi samo login i register stranic
 Postaviti da ulogovan korisnik može da pristupi svim stranicama osim login i register
 */
 
+
 router.beforeEach((to, from, next) => {
   const isThereToken = localStorage.getItem('loginToken');//check if the user has a login token
   console.log(`Guard activated. From: ${from.path} to: ${to.path}`)//awesome consol.log trick to see if this is working
@@ -32,6 +33,7 @@ router.beforeEach((to, from, next) => {
   } else next();
   
 });
+
 
 //*********************************************************** */
 /*
