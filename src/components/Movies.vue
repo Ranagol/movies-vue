@@ -11,22 +11,15 @@
         <th>Genre</th>
         <th>Delete</th>
       </tr>
-      <tr v-for="movie in movies" :key="movie.id">
-        <td>{{ movie.id }}</td>
-        <td><router-link :to="`/movies/${movie.id}`">{{ movie.title }}</router-link></td>
-        <td>{{ movie.director }}</td>
-        <td>{{ movie.imageUrl }}</td>
-        <td>{{ movie.duration }}</td>
-        <td>{{ movie.releaseDate }}</td>
-        <td>{{ movie.genre }}</td>
-        <td><button @click="deleteMovie(movie.id)" class="btn btn-danger">Delete</button></td>
-      </tr>
     </table>
+    <app-movie-row :movies='movies'></app-movie-row>
   </div>
 </template>
 
 <script>
 import movieService from '../services/movieService';
+import MovieRow from './MovieRow';
+import { EventBus } from './eventbus';
 export default {
   name: 'Movies',
   data(){
@@ -42,7 +35,17 @@ export default {
     async deleteMovie(id){
       movieService.deleteMovie(id);
       this.movies = await movieService.getAll();
-    }
+    },
+    
+  },
+  components: {
+    'app-movie-row': MovieRow
+  },
+  mounted(){
+    EventBus.$on('movieDeleted', (id) => {
+      this.deleteMovie(id);
+    })
   }
+  
 }
 </script>
