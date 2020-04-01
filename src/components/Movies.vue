@@ -1,19 +1,23 @@
 <template>
   <div>
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Director</th>
-        <th>url</th>
-        <th>Duration</th>
-        <th>Release date</th>
-        <th>Genre</th>
-        <th>Delete</th>
-      </tr>
-    </table>
-    <app-movie-row :movies='movies'></app-movie-row>
+    <input v-model="filterThis" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <div>
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Director</th>
+          <th>url</th>
+          <th>Duration</th>
+          <th>Release date</th>
+          <th>Genre</th>
+          <th>Delete</th>
+        </tr>
+      </table>
+      <app-movie-row :filteredMovies='filteredMovies'></app-movie-row>
+    </div>
   </div>
+  
 </template>
 
 <script>
@@ -25,6 +29,7 @@ export default {
   data(){
     return {
       movies: [],
+      filterThis: '',
     }
   },
   /*
@@ -58,6 +63,11 @@ export default {
       vm.getAllMovies()
       console.log('beforeRouteEnter has finished its job, movies are here.')
     })
+  },
+  computed: {
+    filteredMovies(){
+      return this.movies.filter( movie => movie.title.toLowerCase().match(this.filterThis))
+    }
   }
   
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tr v-for="movie in movies" :key="movie.id">
+    <tr v-for="movie in filteredMovies" :key="movie.id">
       <td>{{ movie.id }}</td>
       <td><router-link :to="`/movies/${movie.id}`">{{ movie.title }}</router-link></td>
       <td>{{ movie.director }}</td>
@@ -18,7 +18,7 @@
 import { EventBus } from './eventbus';
 export default {
   name: 'MovieRow',
-  props: ['movies'],
+  props: ['filteredMovies'],
   methods: {
     deleteMovie(id){
     EventBus.$emit('movieDeleted', id);
