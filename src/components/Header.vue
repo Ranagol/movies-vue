@@ -8,6 +8,7 @@
       <router-link class="nav-item nav-link" to="/login" v-show="!isAuthenticated">Login</router-link>
       <router-link class="nav-item nav-link" to="/register" v-show="!isAuthenticated">Register</router-link>
       <!--<div v-bind="isAuthenticated">isAuthenticated status: {{ isAuthenticated }}</div>-->
+      <!--<a href="#" class="nav-item nav-link" >{{ token }}</a>-->
     </div>
   </nav>
 </template>
@@ -38,7 +39,9 @@ export default {
     isAuthenticated: function(){
       console.log('isAuthenticated is now: ', this.isAuthenticated);
     }
-  }
+  },
+  
+ 
 };
 
 

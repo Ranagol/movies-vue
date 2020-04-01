@@ -27,15 +27,21 @@ export default {
       movies: [],
     }
   },
+  /*
   async created(){
     this.movies = await movieService.getAll();
     this.$forceUpdate();
   },
+  */
   methods: {
     async deleteMovie(id){
       movieService.deleteMovie(id);
       this.movies = await movieService.getAll();
     },
+
+    async getAllMovies(){
+      this.movies = await movieService.getAll();
+    }
     
   },
   components: {
@@ -44,6 +50,13 @@ export default {
   mounted(){
     EventBus.$on('movieDeleted', (id) => {
       this.deleteMovie(id);
+    })
+  },
+  beforeRouteEnter(to, from, next){
+    console.log(`beforeRouteEnter data fetching activated. From: ${from.path} to: ${to.path}`);
+    next(vm => {
+      vm.getAllMovies()
+      console.log('beforeRouteEnter has finished its job, movies are here.')
     })
   }
   
