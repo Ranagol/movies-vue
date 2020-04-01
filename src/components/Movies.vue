@@ -2,6 +2,7 @@
   <div>
     <input v-model="filterThis" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <div v-if="arrayIsEmpty" class="alert alert-danger">Nazalost, trazeni pojam ne postoji</div>
+    <p>Number of selected movies: {{ selectedMoviesNumber }}</p>
     <div>
       <table class="table">
         <tr>
@@ -12,6 +13,7 @@
           <th>Duration</th>
           <th>Release date</th>
           <th>Genre</th>
+          <th>Selected</th>
           <th>Delete</th>
         </tr>
       </table>
@@ -31,6 +33,7 @@ export default {
       movies: [],
       filterThis: '',
       arrayIsEmpty: false,
+      selectedMovies: [],
     }
   },
   /* //this was commented out, because it's job is done by the fetch data before navigation
@@ -65,6 +68,9 @@ export default {
     EventBus.$on('movieDeleted', (id) => {
       this.deleteMovie(id);
     })
+    EventBus.$on('movieSelected', (id) => {
+      this.selectedMovies.unshift(id);
+    } )
   },
   beforeRouteEnter(to, from, next){
     console.log(`beforeRouteEnter data fetching activated. From: ${from.path} to: ${to.path}`);
@@ -78,6 +84,9 @@ export default {
       let filteredMovies = this.movies.filter( movie => movie.title.toLowerCase().match(this.filterThis));
       this.setTrueOrFalse(filteredMovies.length);
       return filteredMovies;
+    },
+    selectedMoviesNumber(){
+      return this.selectedMovies.length;
     }
   }
   

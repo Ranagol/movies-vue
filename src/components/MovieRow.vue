@@ -8,6 +8,7 @@
       <td>{{ movie.duration }}</td>
       <td>{{ movie.releaseDate }}</td>
       <td>{{ movie.genre }}</td>
+      <td><button @click.once="selectMovie(movie.id)" class="btn btn-info">Select</button></td>
       <td><button @click="deleteMovie(movie.id)" class="btn btn-danger">Delete</button></td>
       <!--This delete function is not working yet. I need to solve the communication with the parent, which will probably happen with vuex?????? -->
     </tr>
@@ -21,7 +22,10 @@ export default {
   props: ['filteredMovies'],
   methods: {
     deleteMovie(id){
-    EventBus.$emit('movieDeleted', id);
+      EventBus.$emit('movieDeleted', id);
+    },
+    selectMovie(id){
+      EventBus.$emit('movieSelected', id);
     }
   }
 }
