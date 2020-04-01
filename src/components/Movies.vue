@@ -1,6 +1,7 @@
 <template>
   <div>
     <input v-model="filterThis" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <div v-if="arrayIsEmpty" class="alert alert-danger">Nazalost, trazeni pojam ne postoji</div>
     <div>
       <table class="table">
         <tr>
@@ -17,7 +18,6 @@
       <app-movie-row :filteredMovies='filteredMovies'></app-movie-row>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -30,9 +30,10 @@ export default {
     return {
       movies: [],
       filterThis: '',
+      arrayIsEmpty: false,
     }
   },
-  /*
+  /* //this was commented out, because it's job is done by the fetch data before navigation
   async created(){
     this.movies = await movieService.getAll();
     this.$forceUpdate();
@@ -46,6 +47,14 @@ export default {
 
     async getAllMovies(){
       this.movies = await movieService.getAll();
+    },
+
+    setTrueOrFalse(arraylength){
+      if (arraylength > 0) {
+        this.arrayIsEmpty = false
+      } else {
+        this.arrayIsEmpty = true;
+      }
     }
     
   },
@@ -66,7 +75,9 @@ export default {
   },
   computed: {
     filteredMovies(){
-      return this.movies.filter( movie => movie.title.toLowerCase().match(this.filterThis))
+      let filteredMovies = this.movies.filter( movie => movie.title.toLowerCase().match(this.filterThis));
+      this.setTrueOrFalse(filteredMovies.length);
+      return filteredMovies;
     }
   }
   
