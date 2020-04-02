@@ -1,8 +1,12 @@
 <template>
   <div>
-    <input v-model="filterThis" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <div v-if="arrayIsEmpty" class="alert alert-danger">Nazalost, trazeni pojam ne postoji</div>
-    <p>Number of selected movies: {{ selectedMoviesNumber }}</p>
+    
+    <div>
+      <p class="makeItInline">Number of selected movies: </p>
+      <button class="btn btn-primary button-margine">Select all</button>
+      <button class="btn btn-secondary">Deselect all</button>
+    </div>
+    
     <div>
       <table class="table">
         <tr>
@@ -17,7 +21,7 @@
           <th>Delete</th>
         </tr>
       </table>
-      <app-movie-row :filteredMovies='filteredMovies'></app-movie-row>
+      <app-movie-row :movies='movies'></app-movie-row>
     </div>
   </div>
 </template>
@@ -31,8 +35,6 @@ export default {
   data(){
     return {
       movies: [],
-      filterThis: '',
-      arrayIsEmpty: false,
       selectedMovies: [],
     }
   },
@@ -52,13 +54,7 @@ export default {
       this.movies = await movieService.getAll();
     },
 
-    setTrueOrFalse(arraylength){
-      if (arraylength > 0) {
-        this.arrayIsEmpty = false
-      } else {
-        this.arrayIsEmpty = true;
-      }
-    }
+    
     
   },
   components: {
@@ -68,9 +64,7 @@ export default {
     EventBus.$on('movieDeleted', (id) => {
       this.deleteMovie(id);
     })
-    EventBus.$on('movieSelected', (id) => {
-      this.selectedMovies.unshift(id);
-    } )
+    
   },
   beforeRouteEnter(to, from, next){
     console.log(`beforeRouteEnter data fetching activated. From: ${from.path} to: ${to.path}`);
@@ -79,16 +73,18 @@ export default {
       console.log('beforeRouteEnter has finished its job, movies are here.')
     })
   },
-  computed: {
-    filteredMovies(){
-      let filteredMovies = this.movies.filter( movie => movie.title.toLowerCase().match(this.filterThis));
-      this.setTrueOrFalse(filteredMovies.length);
-      return filteredMovies;
-    },
-    selectedMoviesNumber(){
-      return this.selectedMovies.length;
-    }
-  }
-  
 }
 </script>
+
+
+
+<style>
+.makeItInline{
+  display: inline;
+}
+
+.button-margine{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+</style>

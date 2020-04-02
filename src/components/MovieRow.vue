@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tr v-for="movie in filteredMovies" :key="movie.id">
+    <tr v-for="movie in movies" :key="movie.id">
       <td>{{ movie.id }}</td>
       <td><router-link :to="`/movies/${movie.id}`">{{ movie.title }}</router-link></td>
       <td>{{ movie.director }}</td>
@@ -8,25 +8,24 @@
       <td>{{ movie.duration }}</td>
       <td>{{ movie.releaseDate }}</td>
       <td>{{ movie.genre }}</td>
-      <td><button @click.once="selectMovie(movie.id)" class="btn btn-info">Select</button></td>
-      <td><button @click="deleteMovie(movie.id)" class="btn btn-danger">Delete</button></td>
+      <td><button class="btn btn-info">Select</button></td>
+      <td><button @click="deleteMovie(movie)" class="btn btn-danger">Delete</button></td>
       <!--This delete function is not working yet. I need to solve the communication with the parent, which will probably happen with vuex?????? -->
     </tr>
   </div>
+  
 </template>
 
 <script>
 import { EventBus } from './eventbus';
 export default {
   name: 'MovieRow',
-  props: ['filteredMovies'],
+  props: ['movies'],
   methods: {
     deleteMovie(id){
       EventBus.$emit('movieDeleted', id);
     },
-    selectMovie(id){
-      EventBus.$emit('movieSelected', id);
-    }
+    
   }
 }
 </script>

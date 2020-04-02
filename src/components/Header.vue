@@ -9,7 +9,7 @@
       <router-link class="nav-item nav-link" to="/register" v-show="!isAuthenticated">Register</router-link>
       <!--<div v-bind="isAuthenticated">isAuthenticated status: {{ isAuthenticated }}</div>-->
       <!--<a href="#" class="nav-item nav-link" >{{ token }}</a>-->
-      <input v-model="filterThis2" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     </div>
   </nav>
 </template>
@@ -21,7 +21,6 @@ export default {
   data() {
     return {
       isAuthenticated: authService.isAuthenticated(),
-      filterThis2:'',
     };
   },
   methods: {
