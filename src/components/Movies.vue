@@ -19,7 +19,12 @@
           <th>Delete</th>
         </tr>
       </table>
-      <app-movie-row :movies='movies'></app-movie-row>
+      <!--OK, here we have a couple of funny things below.
+      1. This is how we can do v-for in directly in the child component <TAG></TAG>
+      2. The searchLetters were sent here to Movies.vue from Header.vue through central store
+      3. searchedMovies was created in getters, from store/movies[].
+      4. With :movie='movie' we are sending the current actual movie to the MovieRow.vue -->
+      <app-movie-row v-for="movie in searchedMovies(searchLetters)" :key="movie.id" :movie='movie'></app-movie-row>
     </div>
   </div>
 </template>
@@ -36,7 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['movies']),
+    ...mapGetters(['movies', 'searchLetters', 'searchedMovies']),
   },
   methods: {
     ...mapActions(['getAllMovies']),
@@ -50,7 +55,7 @@ export default {
     'app-movie-row': MovieRow
   },
  
-  beforeRouteEnter(to, from, next){
+  beforeRouteEnter(to, from, next){//here we use beforeRouteEnter to trigger, start the movie-getting-process
     console.log(`beforeRouteEnter data fetching activated. From: ${from.path} to: ${to.path}`);
     next(vm => {
       vm.getAllMovies()

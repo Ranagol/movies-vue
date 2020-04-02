@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
   getters,
   state: {
     movies: [],
+    searchLetters: '',
 
   },
   mutations,
