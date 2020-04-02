@@ -1,13 +1,11 @@
 <template>
   <div>
-    
-    <div>
+    <div><!--SELECT, NUMBERS-->
       <p class="makeItInline">Number of selected movies: </p>
       <button class="btn btn-primary button-margine">Select all</button>
       <button class="btn btn-secondary">Deselect all</button>
     </div>
-    
-    <div>
+    <div><!--MOVIE TABLE-->
       <table class="table">
         <tr>
           <th>ID</th>
