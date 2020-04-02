@@ -9,7 +9,7 @@
       <td>{{ movie.releaseDate }}</td>
       <td>{{ movie.genre }}</td>
       <td><button class="btn btn-info">Select</button></td>
-      <td><button @click="deleteMovie(movie)" class="btn btn-danger">Delete</button></td>
+      <td><button  class="btn btn-danger">Delete</button></td>
       <!--This delete function is not working yet. I need to solve the communication with the parent, which will probably happen with vuex?????? -->
     </tr>
   </div>
@@ -17,15 +17,11 @@
 </template>
 
 <script>
-import { EventBus } from './eventbus';
 export default {
   name: 'MovieRow',
   props: ['movies'],
   methods: {
-    deleteMovie(id){
-      EventBus.$emit('movieDeleted', id);
-    },
-    
+   
   }
 }
 </script>

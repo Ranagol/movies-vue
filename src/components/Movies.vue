@@ -27,43 +27,29 @@
 <script>
 import movieService from '../services/movieService';
 import MovieRow from './MovieRow';
-import { EventBus } from './eventbus';
+import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'Movies',
   data(){
     return {
-      movies: [],
-      selectedMovies: [],
+
     }
   },
-  /* //this was commented out, because it's job is done by the fetch data before navigation
-  async created(){
-    this.movies = await movieService.getAll();
-    this.$forceUpdate();
+  computed: {
+    ...mapGetters(['movies']),
   },
-  */
   methods: {
+    ...mapActions(['getAllMovies']),
+
     async deleteMovie(id){
       movieService.deleteMovie(id);
       this.movies = await movieService.getAll();
     },
-
-    async getAllMovies(){
-      this.movies = await movieService.getAll();
-    },
-
-    
-    
   },
   components: {
     'app-movie-row': MovieRow
   },
-  mounted(){
-    EventBus.$on('movieDeleted', (id) => {
-      this.deleteMovie(id);
-    })
-    
-  },
+ 
   beforeRouteEnter(to, from, next){
     console.log(`beforeRouteEnter data fetching activated. From: ${from.path} to: ${to.path}`);
     next(vm => {
