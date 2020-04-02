@@ -25,6 +25,7 @@
       3. searchedMovies was created in getters, from store/movies[].
       4. With :movie='movie' we are sending the current actual movie to the MovieRow.vue -->
       <app-movie-row v-for="movie in searchedMovies(searchLetters)" :key="movie.id" :movie='movie'></app-movie-row>
+      <div v-if="!searchedMovies(searchLetters).length" class="alert alert-danger">Nema pronadjenih filmova!</div>
     </div>
   </div>
 </template>
