@@ -8,8 +8,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   getters,
   state: {
-    movies: [],
-    searchLetters: '',
+    movies: [],//this is the list of movies
+    searchLetters: '',//...used for searching function
+    selectedMovies: [],//the selected movies will be stored here
 
   },
   mutations,

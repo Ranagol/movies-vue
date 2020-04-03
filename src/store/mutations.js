@@ -5,5 +5,9 @@ export default {
 
   setSearchLetters(state, searchLetters){
     state.searchLetters = searchLetters;
+  },
+
+  selectedMovie(state, movie){
+    state.selectedMovies.push(movie);
   }
 }

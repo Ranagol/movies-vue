@@ -1,7 +1,7 @@
 <template>
   <div>
     <div><!--SELECT, NUMBERS-->
-      <p class="makeItInline">Number of selected movies: </p>
+      <p class="makeItInline">Number of selected movies: {{ selectedMovies.length }} </p>
       <button class="btn btn-primary button-margine">Select all</button>
       <button class="btn btn-secondary">Deselect all</button>
     </div>
@@ -42,7 +42,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['movies', 'searchLetters', 'searchedMovies']),
+    ...mapGetters(['movies', 'searchLetters', 'searchedMovies', 'selectedMovies']),
   },
   methods: {
     ...mapActions(['getAllMovies']),

@@ -7,5 +7,9 @@ export default {
 
   setSearchLetters( {commit }, searchLetters){
     commit('setSearchLetters', searchLetters);
+  },
+
+  selectedMovie({commit}, movie){
+    commit('selectedMovie', movie);
   }
 }

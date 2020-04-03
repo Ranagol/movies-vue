@@ -13,5 +13,8 @@ export default {
     }
   },
 
+  selectedMovies: state => state.selectedMovies,
+  
+
 
 }
