@@ -19,7 +19,24 @@ export default {
 
   unSelectAll(state){
     state.selectedMovies = [];
-  }
+  },
+
+  sortMovies(state, { type, isAsc }) {//first sort by type(title or duration in asc order, anyway and automatically, for every sort request)
+
+    state.movies.sort((movie1, movie2) => {////The sort() method sorts an array alphabetically. Here we set up the sort() how to handle strings (movie titles) from movie objects, and how to sort them.
+
+      if (movie1[type] > movie2[type]) {//type could be movie title or movie duration
+        return 1;
+      }
+      if(movie1[type] < movie2[type]) {//the movie duration is handled here as string
+        return -1;
+      }
+      return 0;
+    })
+    if (!isAsc) {//if the sorting should be descending, just reverse the previous asc sorting
+        state.movies.reverse();//The reverse() method reverses the elements in an array.
+    }
+  },
 
  
 }

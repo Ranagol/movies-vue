@@ -19,6 +19,10 @@ export default {
 
   unSelectAll({commit}){
     commit('unSelectAll');
+  },
+
+  sortMovies({commit}, howToSort){//remember, howToSort is an object, like this: {type: 'duration', isAsc: true}
+    commit('sortMovies', howToSort);
   }
   
 }

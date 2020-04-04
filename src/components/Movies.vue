@@ -9,10 +9,15 @@
       <table class="table">
         <tr>
           <th>ID</th>
-          <th>Title</th>
+          <th>Title
+            <!--We want to sort asc/desc by the title or the duration. That are 4 different functions. But, we could make 1 universal sorting function, that will receive through arguments should it sort asc or desc, and should it sort by title or by duration. This argument will be one object, with type for title or duration and isAsc boolean for 'is ascending true'. -->
+            <button @click="sortMovies({type: 'title', isAsc: true})">&darr;</button><!--asc--> 
+            <button @click="sortMovies({type: 'title', isAsc: false})">&uarr;</button></th><!--desc--> 
           <th>Director</th>
           <th>url</th>
-          <th>Duration</th>
+          <th>Duration
+            <button @click="sortMovies({type: 'duration', isAsc: true})">&darr;</button><!--asc-->   
+            <button @click="sortMovies({type: 'duration', isAsc: false})">&uarr;</button></th><!--desc-->
           <th>Release date</th>
           <th>Genre</th>
           <th>Selected</th>
@@ -48,7 +53,7 @@ export default {
     
   },
   methods: {
-    ...mapActions(['getAllMovies', 'selectAll', 'unSelectAll']),
+    ...mapActions(['getAllMovies', 'selectAll', 'unSelectAll', 'sortMovies']),
 
     async deleteMovie(id){
       movieService.deleteMovie(id);
