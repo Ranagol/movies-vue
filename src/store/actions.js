@@ -23,6 +23,13 @@ export default {
 
   sortMovies({commit}, howToSort){//remember, howToSort is an object, like this: {type: 'duration', isAsc: true}
     commit('sortMovies', howToSort);
+  },
+
+  nextPage({commit}) {
+    commit('nextPage');
+  },
+  prevPage({commit}) {
+    commit('prevPage');
   }
   
 }

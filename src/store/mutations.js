@@ -38,5 +38,18 @@ export default {
     }
   },
 
+  nextPage(state) {
+    if (state.currentPage<(state.movies.length / 5)) {
+      state.currentPage++;
+    }
+    
+  },
+  prevPage(state) {
+    if (state.currentPage>1) {//because we dont want to go below 0
+      state.currentPage--;
+    }
+    
+  }
+
  
 }

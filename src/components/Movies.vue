@@ -30,10 +30,23 @@
       3. searchedMovies was created in getters, from store/movies[].
       4. With :movie='movie' we are sending the current actual movie to the MovieRow.vue -->
 
-      <app-movie-row v-for="movie in searchedMovies(searchLetters)" :key="movie.id" :movie='movie'></app-movie-row>
+      <app-movie-row v-for="movie in moviesForCurrentPage" :key="movie.id" :movie='movie'></app-movie-row>
       <!--***************THIS IS THE BRUTAL PART****************** -->
+       <!--SEARCH-->
       <div v-if="!searchedMovies(searchLetters).length" class="alert alert-danger">Nema pronadjenih filmova!</div>
     </div>
+    <!--PAGINATION-->
+    <ul class="pagination">
+      <li class="page-item">
+        <button @click="paginatePrev" class="page-link">Previous</button>
+      </li>
+      <li class="page-item active">
+        <p class="page-link" >{{currentPage}}</p>
+      </li>
+      <li class="page-item">
+        <button @click="paginateNext" class="page-link">Next</button>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -49,18 +62,24 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['movies', 'searchLetters', 'searchedMovies', 'selectedMovies']),
+    ...mapGetters(['movies', 'searchLetters', 'searchedMovies', 'selectedMovies', 'moviesForCurrentPage', 'currentPage']),
     
   },
   methods: {
-    ...mapActions(['getAllMovies', 'selectAll', 'unSelectAll', 'sortMovies']),
+    ...mapActions(['getAllMovies', 'selectAll', 'unSelectAll', 'sortMovies','nextPage', 'prevPage']),
 
     async deleteMovie(id){
       movieService.deleteMovie(id);
       this.movies = await movieService.getAll();
     },
 
-
+    //pagination methods
+    paginatePrev() {
+      this.prevPage();
+    },
+    paginateNext() {
+      this.nextPage();
+    },
    
   },
   components: {

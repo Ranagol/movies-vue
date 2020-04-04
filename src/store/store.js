@@ -11,6 +11,7 @@ export const store = new Vuex.Store({
     movies: [],//this is the list of movies
     searchLetters: '',//...used for searching function
     selectedMovies: [],//the selected movies will be stored here
+    currentPage: 1//we start on page 1
   },
   mutations,
   actions
