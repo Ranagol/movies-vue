@@ -2,8 +2,8 @@
   <div>
     <div><!--SELECT, NUMBERS-->
       <p class="makeItInline">Number of selected movies: {{ selectedMovies.length }} </p>
-      <button class="btn btn-primary button-margine">Select all</button>
-      <button class="btn btn-secondary">Deselect all</button>
+      <button @click="selectAll" class="btn btn-primary button-margine">Select all</button>
+      <button @click="unSelectAll" class="btn btn-secondary">Unselect all</button>
     </div>
     <div><!--MOVIE TABLE-->
       <table class="table">
@@ -24,7 +24,9 @@
       2. The searchLetters were sent here to Movies.vue from Header.vue through central store
       3. searchedMovies was created in getters, from store/movies[].
       4. With :movie='movie' we are sending the current actual movie to the MovieRow.vue -->
+
       <app-movie-row v-for="movie in searchedMovies(searchLetters)" :key="movie.id" :movie='movie'></app-movie-row>
+      <!--***************THIS IS THE BRUTAL PART****************** -->
       <div v-if="!searchedMovies(searchLetters).length" class="alert alert-danger">Nema pronadjenih filmova!</div>
     </div>
   </div>
@@ -43,14 +45,18 @@ export default {
   },
   computed: {
     ...mapGetters(['movies', 'searchLetters', 'searchedMovies', 'selectedMovies']),
+    
   },
   methods: {
-    ...mapActions(['getAllMovies']),
+    ...mapActions(['getAllMovies', 'selectAll', 'unSelectAll']),
 
     async deleteMovie(id){
       movieService.deleteMovie(id);
       this.movies = await movieService.getAll();
     },
+
+
+   
   },
   components: {
     'app-movie-row': MovieRow
@@ -63,6 +69,16 @@ export default {
       console.log('beforeRouteEnter has finished its job, movies are here.')
     })
   },
+
+  watch: {
+    movies: {//wathc the movie property
+      deep: true,//with this the watcher will be able to watch key-value changes in the movies array
+      handler(){//do this, if change happens:
+        console.log('The movie array watcher has detected a change in the movie array.');
+        this.$forceUpdate();//this will force update
+      }
+    }
+  }
 }
 </script>
 

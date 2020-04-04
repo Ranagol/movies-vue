@@ -11,5 +11,14 @@ export default {
 
   selectedMovie({commit}, movie){
     commit('selectedMovie', movie);
+  },
+
+  selectAll( {commit}){
+    commit('selectAll');
+  },
+
+  unSelectAll({commit}){
+    commit('unSelectAll');
   }
+  
 }

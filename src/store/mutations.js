@@ -8,6 +8,18 @@ export default {
   },
 
   selectedMovie(state, movie){
-    state.selectedMovies.push(movie);
+    if(state.selectedMovies.indexOf(movie) === -1) {//if movie is not already in the selectedMovies array...
+      state.selectedMovies.push(movie);//...then push the movie into the selectedMovies array
+    }
+  },
+
+  selectAll(state){
+    state.selectedMovies = state.movies;
+  },
+
+  unSelectAll(state){
+    state.selectedMovies = [];
   }
+
+ 
 }
