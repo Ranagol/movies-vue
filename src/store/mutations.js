@@ -1,6 +1,7 @@
 export default {
   getAllMovies(state, movies){
     state.movies = movies;
+    
   },
 
   setSearchLetters(state, searchLetters){
@@ -39,7 +40,7 @@ export default {
   },
 
   nextPage(state) {
-    if (state.currentPage<(state.movies.length / 5)) {
+    if (state.currentPage<(state.movies.length / 5)) {//because we don't want to go above the limit
       state.currentPage++;
     }
     
